@@ -3,7 +3,7 @@ services:
     name: reviewradar
     runtime: docker
     plan: free
-    region: oregon
+    region: frankfurt
     dockerfilePath: ./Dockerfile
     dockerContext: .
     healthCheckPath: /login
@@ -42,4 +42,4 @@ databases:
     databaseName: reviewradar
     user: reviewradar
     plan: free
-    region: oregon
+    region: frankfurt
