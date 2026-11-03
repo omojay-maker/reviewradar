@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sign in to ReviewRadar</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="auth-shell" style="min-height: 100vh; display: flex; flex-wrap: wrap; background: #F5F7F8">
+
+  <section class="auth-hero" style="flex: 1 1 640px; min-width: 0; box-sizing: border-box; background: #0D4A57; color: #fff; padding: 48px 64px; display: flex; flex-direction: column; justify-content: space-between; gap: 40px">
+    <div style="display: flex; align-items: center; gap: 10px">
+      <svg width="30" height="30" viewBox="0 0 28 28" aria-hidden="true"><circle cx="14" cy="14" r="12" fill="none" stroke="#fff" stroke-width="2"/><circle cx="14" cy="14" r="6.5" fill="none" stroke="#fff" stroke-width="2" opacity=".55"/><path d="M14 14 L24 8.5" stroke="#F2B544" stroke-width="2.6" stroke-linecap="round"/><circle cx="14" cy="14" r="2" fill="#fff"/></svg>
+      <span class="disp" style="font-size: 22px; font-weight: 700; letter-spacing: -0.01em">ReviewRadar</span>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 28px; max-width: 560px">
+      <h1 class="disp" style="margin: 0; font-size: 54px; line-height: 1.02; letter-spacing: -0.025em; font-weight: 700">Every review, read and sorted for you.</h1>
+        <p style="margin: 0; font-size: 18px; line-height: 1.5; color: rgba(255,255,255,.8); max-width: 480px">Analyze reviews manually or send them through the API. Each company's review data stays in its own workspace.</p>
+
+      <div class="auth-examples" style="display: flex; flex-direction: column; gap: 10px; margin-top: 8px">
+        <div style="font-size: 14px; font-weight: 600; color: rgba(255,255,255,.8)">Example analyses</div>
+
+        <div style="background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.16); border-radius: 14px; padding: 14px 16px; display: flex; flex-direction: column; gap: 10px">
+          <div style="display: flex; justify-content: space-between; align-items: center; gap: 12px"><span style="font-size: 13px; color: rgba(255,255,255,.75)">Trustpilot, 2 min ago</span><span class="pill neg">Negative</span></div>
+          <div style="font-size: 16px; line-height: 1.4">Exports crashed twice and nobody replied. Thinking of switching.</div>
+          <div style="display: flex; gap: 6px"><span class="chip chip-dark">reliability</span><span class="chip chip-dark">support</span></div>
+        </div>
+
+        <div style="background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.16); border-radius: 14px; padding: 14px 16px; display: flex; flex-direction: column; gap: 10px">
+          <div style="display: flex; justify-content: space-between; align-items: center; gap: 12px"><span style="font-size: 13px; color: rgba(255,255,255,.75)">App Store, 6 min ago</span><span class="pill pos">Positive</span></div>
+          <div style="font-size: 16px; line-height: 1.4">Setup took ten minutes. The dashboard is exactly what we needed.</div>
+          <div style="display: flex; gap: 6px"><span class="chip chip-dark">onboarding</span><span class="chip chip-dark">dashboard</span></div>
+        </div>
+
+        <div style="background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.16); border-radius: 14px; padding: 14px 16px; display: flex; flex-direction: column; gap: 10px">
+          <div style="display: flex; justify-content: space-between; align-items: center; gap: 12px"><span style="font-size: 13px; color: rgba(255,255,255,.75)">API, 11 min ago</span><span class="pill neu">Neutral</span></div>
+          <div style="font-size: 16px; line-height: 1.4">Fine overall, but delivery windows keep slipping.</div>
+          <div style="display: flex; gap: 6px"><span class="chip chip-dark">shipping</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div style="font-size: 13px; color: rgba(255,255,255,.7)">Sentiment, topics and urgency are analyzed with Groq.</div>
+  </section>
+
+  <section class="auth-panel" style="flex: 1 1 560px; min-width: 0; box-sizing: border-box; display: flex; align-items: center; justify-content: center; padding: 48px 32px">
+    <div style="width: 100%; max-width: 400px; display: flex; flex-direction: column; gap: 28px">
+      <div style="display: flex; flex-direction: column; gap: 8px">
+        <h2 class="disp" style="margin: 0; font-size: 36px; letter-spacing: -0.02em; font-weight: 700">Welcome back</h2>
+        <p style="margin: 0; font-size: 16px; line-height: 1.5; color: #4F5F69">Sign in to see how customers feel today.</p>
+      </div>
+
+      <form style="display: flex; flex-direction: column; gap: 18px">
+        <div>
+          <label class="lbl" for="email">Work email</label>
+          <input class="inp" id="email" type="email" placeholder="you@company.com" autocomplete="email" required>
+        </div>
+        <div>
+          <div style="display: flex; justify-content: space-between; align-items: baseline">
+            <label class="lbl" for="password">Password</label>
+            <span class="muted" style="font-size: 13px; margin-bottom: 6px">Password reset is not enabled yet.</span>
+          </div>
+          <input class="inp" id="password" type="password" placeholder="Enter your password" autocomplete="current-password" required>
+        </div>
+        <button class="btn lg block" type="button">Sign in</button>
+      </form>
+
+      <p style="margin: 0; font-size: 15px; color: #4F5F69; text-align: center">New to ReviewRadar? <a href="signup">Create an account</a></p>
+    </div>
+  </section>
+
+</div>
+<script src="app.js" defer></script>
+</body>
+</html>

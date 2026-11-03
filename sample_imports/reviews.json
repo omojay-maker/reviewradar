@@ -1,0 +1,78 @@
+{
+  "reviews": [
+    {
+      "external_id": "json-001",
+      "text": "The checkout was quick, the packaging was excellent, and the product arrived a day early.",
+      "author_name": "Ada",
+      "rating": 5,
+      "source": "web",
+      "source_url": "https://example.com/reviews/json-001"
+    },
+    {
+      "external_id": "json-002",
+      "text": "My refund has been stuck for two weeks and support keeps closing my ticket without a reply.",
+      "author_name": "Ben",
+      "rating": 1,
+      "source": "email",
+      "source_url": "https://example.com/reviews/json-002"
+    },
+    {
+      "external_id": "json-003",
+      "text": "The app does what I need, but the dashboard feels dated and the export is slow.",
+      "author_name": "Cara",
+      "rating": 3,
+      "source": "web"
+    },
+    {
+      "external_id": "json-004",
+      "text": "Onboarding was smooth and the team answered every question within minutes.",
+      "author_name": "Dan",
+      "rating": 5,
+      "source": "g2",
+      "source_url": "https://example.com/reviews/json-004"
+    },
+    {
+      "external_id": "json-005",
+      "text": "The billing page charged me twice and I still cannot download an invoice.",
+      "author_name": "Eve",
+      "rating": 2,
+      "source": "trustpilot"
+    },
+    {
+      "external_id": "json-006",
+      "text": "Great product quality, though shipping took much longer than the estimate.",
+      "author_name": "Frank",
+      "rating": 4,
+      "source": "shopify"
+    },
+    {
+      "external_id": "json-007",
+      "text": "The replacement part sparked on first use. I need someone to contact me today.",
+      "author_name": "Grace",
+      "rating": 1,
+      "source": "web",
+      "source_url": "https://example.com/reviews/json-007"
+    },
+    {
+      "external_id": "json-008",
+      "text": "Support replaced my broken item without any argument. Excellent service.",
+      "author_name": "Hank",
+      "rating": 5,
+      "source": "email"
+    },
+    {
+      "external_id": "json-009",
+      "text": "The free plan is useful, but the monthly review limit was reached too quickly.",
+      "author_name": "Ivy",
+      "rating": 3,
+      "source": "app"
+    },
+    {
+      "external_id": "json-010",
+      "text": "Clean interface and the sentiment summaries save me a lot of time every week.",
+      "author_name": "Jack",
+      "rating": 5,
+      "source": "web"
+    }
+  ]
+}

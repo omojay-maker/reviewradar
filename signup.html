@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Create your ReviewRadar account</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="auth-shell" style="min-height: 100vh; display: flex; flex-wrap: wrap; background: #F5F7F8">
+
+  <section class="auth-form-panel" style="flex: 1 1 560px; min-width: 0; box-sizing: border-box; display: flex; align-items: center; justify-content: center; padding: 48px 32px; order: 1">
+    <div style="width: 100%; max-width: 420px; display: flex; flex-direction: column; gap: 26px">
+      <div style="display: flex; flex-direction: column; gap: 8px">
+        <h1 class="disp" style="margin: 0; font-size: 36px; letter-spacing: -0.02em; font-weight: 700">Create your workspace</h1>
+        <p style="margin: 0; font-size: 16px; line-height: 1.5; color: #4F5F69">Create a workspace and start analyzing customer feedback right away.</p>
+      </div>
+
+      <form style="display: flex; flex-direction: column; gap: 18px">
+        <div>
+          <label class="lbl" for="company">Company name</label>
+          <input class="inp" id="company" type="text" placeholder="Acme Corp" autocomplete="organization" required minlength="2" maxlength="255">
+        </div>
+        <div>
+          <label class="lbl" for="email">Work email</label>
+          <input class="inp" id="email" type="email" placeholder="you@company.com" autocomplete="email" required>
+        </div>
+        <div>
+          <label class="lbl" for="password">Password</label>
+          <input class="inp" id="password" type="password" placeholder="Create a password" autocomplete="new-password" required minlength="8" maxlength="72">
+          <div class="hint">Use at least 8 characters.</div>
+        </div>
+        <label style="display: flex; gap: 10px; align-items: flex-start; font-size: 14px; line-height: 1.45; color: #4F5F69">
+          <input type="checkbox" required style="width: 18px; height: 18px; margin: 1px 0 0; accent-color: #0D4A57">
+          <span>I understand ReviewRadar sends review text to Groq for AI analysis, and confirm I have permission to submit it.</span>
+        </label>
+        <button class="btn lg block" type="button">Create account</button>
+      </form>
+
+      <p style="margin: 0; font-size: 15px; color: #4F5F69; text-align: center">Already have an account? <a href="login">Sign in</a></p>
+    </div>
+  </section>
+
+  <section class="auth-hero" style="flex: 1 1 640px; min-width: 0; box-sizing: border-box; background: #0D4A57; color: #fff; padding: 48px 64px; display: flex; flex-direction: column; justify-content: space-between; gap: 40px; order: 2">
+    <div style="display: flex; align-items: center; justify-content: space-between">
+      <div style="display: flex; align-items: center; gap: 10px">
+        <svg width="30" height="30" viewBox="0 0 28 28" aria-hidden="true"><circle cx="14" cy="14" r="12" fill="none" stroke="#fff" stroke-width="2"/><circle cx="14" cy="14" r="6.5" fill="none" stroke="#fff" stroke-width="2" opacity=".55"/><path d="M14 14 L24 8.5" stroke="#F2B544" stroke-width="2.6" stroke-linecap="round"/><circle cx="14" cy="14" r="2" fill="#fff"/></svg>
+        <span class="disp" style="font-size: 22px; font-weight: 700; letter-spacing: -0.01em">ReviewRadar</span>
+      </div>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 36px; max-width: 520px">
+      <h2 class="disp" style="margin: 0; font-size: 46px; line-height: 1.05; letter-spacing: -0.025em; font-weight: 700">From first review to first insight.</h2>
+
+      <ol style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 0">
+        <li style="display: flex; gap: 20px">
+          <div style="display: flex; flex-direction: column; align-items: center"><span class="disp" style="width: 36px; height: 36px; border-radius: 50%; background: #F2B544; color: #3A2600; font-weight: 700; display: flex; align-items: center; justify-content: center; flex: none">1</span><span style="width: 2px; flex: 1; min-height: 28px; background: rgba(255,255,255,.28)"></span></div>
+          <div style="padding-bottom: 28px"><div style="font-size: 18px; font-weight: 600">Create your workspace</div><div style="font-size: 15px; line-height: 1.5; color: rgba(255,255,255,.78); margin-top: 4px">Each company starts with its own private workspace and owner login.</div></div>
+        </li>
+        <li style="display: flex; gap: 20px">
+          <div style="display: flex; flex-direction: column; align-items: center"><span class="disp" style="width: 36px; height: 36px; border-radius: 50%; border: 2px solid rgba(255,255,255,.5); font-weight: 700; display: flex; align-items: center; justify-content: center; flex: none">2</span><span style="width: 2px; flex: 1; min-height: 28px; background: rgba(255,255,255,.28)"></span></div>
+          <div style="padding-bottom: 28px"><div style="font-size: 18px; font-weight: 600">Add your reviews</div><div style="font-size: 15px; line-height: 1.5; color: rgba(255,255,255,.78); margin-top: 4px">Analyze a review manually or send reviews through the authenticated API.</div></div>
+        </li>
+        <li style="display: flex; gap: 20px">
+          <div style="display: flex; flex-direction: column; align-items: center"><span class="disp" style="width: 36px; height: 36px; border-radius: 50%; border: 2px solid rgba(255,255,255,.5); font-weight: 700; display: flex; align-items: center; justify-content: center; flex: none">3</span></div>
+          <div><div style="font-size: 18px; font-weight: 600">See how customers feel</div><div style="font-size: 15px; line-height: 1.5; color: rgba(255,255,255,.78); margin-top: 4px">Every review gets a sentiment, topics and an urgency level, so the ones that need a reply rise to the top.</div></div>
+        </li>
+      </ol>
+    </div>
+
+    <div style="font-size: 13px; color: rgba(255,255,255,.7)">Reviews are isolated by company workspace. Review text is processed by Groq to generate analysis.</div>
+  </section>
+
+</div>
+<script src="app.js" defer></script>
+</body>
+</html>

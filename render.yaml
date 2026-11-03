@@ -1,0 +1,70 @@
+services:
+  - type: web
+    name: reviewradar
+    runtime: docker
+    plan: free
+    region: oregon
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    healthCheckPath: /login
+    envVars:
+      - key: PORT
+        value: 10000
+      - key: APP_ENV
+        value: production
+      - key: APP_CORS_ORIGIN
+        value: ""
+      - key: JWT_SECRET
+        generateValue: true
+      - key: JWT_TTL
+        value: 3600
+      - key: DB_HOST
+        fromService:
+          type: pserv
+          name: reviewradar-mysql
+          property: host
+      - key: DB_PORT
+        value: 3306
+      - key: DB_NAME
+        value: reviewradar
+      - key: DB_USER
+        fromService:
+          type: pserv
+          name: reviewradar-mysql
+          envVarKey: MYSQL_USER
+      - key: DB_PASSWORD
+        fromService:
+          type: pserv
+          name: reviewradar-mysql
+          envVarKey: MYSQL_PASSWORD
+      - key: GROQ_API_KEY
+        sync: false
+      - key: GROQ_MODEL
+        value: openai/gpt-oss-20b
+      - key: GROQ_TIMEOUT
+        value: 30
+      - key: GROQ_CONCURRENCY
+        value: 5
+      - key: PDFTOTEXT_BIN
+        value: /usr/bin/pdftotext
+
+  - type: pserv
+    name: reviewradar-mysql
+    runtime: docker
+    plan: 0.5c-512mb
+    region: oregon
+    dockerfilePath: ./Dockerfile.mysql
+    dockerContext: .
+    envVars:
+      - key: MYSQL_DATABASE
+        value: reviewradar
+      - key: MYSQL_USER
+        value: reviewradar
+      - key: MYSQL_PASSWORD
+        generateValue: true
+      - key: MYSQL_ROOT_PASSWORD
+        generateValue: true
+    disk:
+      name: reviewradar-mysql-data
+      mountPath: /var/lib/mysql
+      sizeGB: 5

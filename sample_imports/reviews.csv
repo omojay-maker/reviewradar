@@ -1,0 +1,11 @@
+external_id,text,author_name,rating,source,source_url
+csv-001,"The checkout was quick, the packaging was excellent, and the product arrived a day early.",Ada,5,web,https://example.com/reviews/csv-001
+csv-002,"My refund has been stuck for two weeks and support keeps closing my ticket without a reply.",Ben,1,email,https://example.com/reviews/csv-002
+csv-003,"The app does what I need, but the dashboard feels dated and the export is slow.",Cara,3,web,
+csv-004,"Onboarding was smooth and the team answered every question within minutes.",Dan,5,g2,https://example.com/reviews/csv-004
+csv-005,"The billing page charged me twice and I still cannot download an invoice.",Eve,2,trustpilot,
+csv-006,"Great product quality, though shipping took much longer than the estimate.",Frank,4,shopify,
+csv-007,"The replacement part sparked on first use. I need someone to contact me today.",Grace,1,web,https://example.com/reviews/csv-007
+csv-008,"Support replaced my broken item without any argument. Excellent service.",Hank,5,email,
+csv-009,"The free plan is useful, but the monthly review limit was reached too quickly.",Ivy,3,app,
+csv-010,"Clean interface and the sentiment summaries save me a lot of time every week.",Jack,5,web,

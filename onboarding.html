@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Check your columns</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div style="min-height: 100vh; background: #EDF0F2; display: flex; flex-direction: column">
+
+  <header class="ob-header" style="display: flex; align-items: center; justify-content: space-between; padding: 22px 48px; gap: 16px; flex-wrap: wrap">
+    <div style="display: flex; align-items: center; gap: 10px; color: #0D4A57">
+      <svg width="28" height="28" viewBox="0 0 28 28" aria-hidden="true"><circle cx="14" cy="14" r="12" fill="none" stroke="#0D4A57" stroke-width="2"/><circle cx="14" cy="14" r="6.5" fill="none" stroke="#0D4A57" stroke-width="2" opacity=".55"/><path d="M14 14 L24 8.5" stroke="#E39A12" stroke-width="2.6" stroke-linecap="round"/><circle cx="14" cy="14" r="2" fill="#0D4A57"/></svg>
+      <span class="disp" style="font-size: 21px; font-weight: 700; letter-spacing: -0.01em">ReviewRadar</span>
+    </div>
+    <ol style="margin: 0; padding: 0; list-style: none; display: flex; align-items: center; gap: 14px; font-size: 15px; flex-wrap: wrap">
+      <li style="display: flex; align-items: center; gap: 8px; color: #4F5F69"><span style="width: 26px; height: 26px; border-radius: 50%; background: #0D4A57; display: flex; align-items: center; justify-content: center"><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M3 7.5l2.6 2.6L11 4.5" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Add reviews</li>
+      <li style="width: 28px; height: 2px; background: #0D4A57"></li>
+      <li style="display: flex; align-items: center; gap: 8px; font-weight: 600"><span class="disp" style="width: 26px; height: 26px; border-radius: 50%; border: 2px solid #0D4A57; display: flex; align-items: center; justify-content: center; font-size: 13px">2</span>Check columns</li>
+      <li style="width: 28px; height: 2px; background: #AEBAC2"></li>
+      <li style="display: flex; align-items: center; gap: 8px; color: #4F5F69"><span class="disp" style="width: 26px; height: 26px; border-radius: 50%; border: 2px solid #AEBAC2; display: flex; align-items: center; justify-content: center; font-size: 13px">3</span>Analyze</li>
+    </ol>
+    <a href="overview" style="font-size: 15px">Skip for now</a>
+  </header>
+
+  <main class="ob-main" style="flex: 1; display: flex; flex-wrap: wrap; gap: 28px; align-items: flex-start; justify-content: center; padding: 16px 48px 56px; box-sizing: border-box">
+    <p class="muted" role="status">Loading your company workspace…</p>
+  </main>
+</div>
+<script src="app.js" defer></script>
+</body>
+</html>
