@@ -1,28 +1,29 @@
 # ReviewRadar
 
-ReviewRadar is a PHP and MySQL multi-tenant review analysis app. Company accounts are isolated by `company_id`. Review sentiment and topics are generated through Groq.
+ReviewRadar is a PHP and PostgreSQL multi-tenant review analysis app. Company accounts are isolated by `company_id`. Review sentiment and topics are generated through Groq.
 
 ## Requirements
 
-- PHP 8.2 or newer with `pdo_mysql`, `curl`, `mbstring`, `dom`, `xml`, and `zip`
-- MySQL 8.0.4 or newer
+- PHP 8.2 or newer with `pdo_pgsql`, `curl`, `mbstring`, `dom`, `xml`, and `zip`
+- PostgreSQL 13 or newer
 - `pdftotext` from poppler-utils for text-based PDF imports (optional)
 - HTTPS for public deployment
 - A Groq API key
 
 ## Local setup
 
-1. Run `schema.sql` with a MySQL administrator, then create an application user with only the permissions the runtime needs:
+1. Create the database and an application user with only the permissions the runtime needs:
 
    ```sql
-   CREATE USER 'reviewradar_app'@'127.0.0.1' IDENTIFIED BY 'use-a-long-random-password';
-   GRANT SELECT, INSERT, UPDATE, DELETE ON reviewradar.* TO 'reviewradar_app'@'127.0.0.1';
+   CREATE USER reviewradar_app WITH PASSWORD 'use-a-long-random-password';
+   CREATE DATABASE reviewradar OWNER reviewradar_app;
    ```
 
    Use a unique password and replace the example in the command.
-2. Copy `.env.example` to `.env` and set the database credentials and `GROQ_API_KEY`. For local HTTP development, set `APP_ENV=local`.
-3. Start the PHP development server from the project directory with `php -d upload_max_filesize=20M -d post_max_size=25M -S 127.0.0.1:8080 -t . router.php`.
-4. Open `http://127.0.0.1:8080/` and create a company workspace.
+2. Copy `.env.example` to `.env` and set the database credentials and `GROQ_API_KEY`. For local HTTP development, set `APP_ENV=local` and `DB_SSLMODE=disable`.
+3. Apply the schema with `php scripts/migrate.php` (or `psql -d reviewradar -f schema.sql`).
+4. Start the PHP development server from the project directory with `php -d upload_max_filesize=20M -d post_max_size=25M -S 127.0.0.1:8080 -t . router.php`.
+5. Open `http://127.0.0.1:8080/` and create a company workspace.
 
 `router.php` blocks `.env`, `src/`, `config/`, `tests/`, and other non-public repository files because PHP's built-in server ignores `.htaccess`. The built-in PHP server is for local development only. Do not use it as the public production server. The `-d` flags raise PHP's upload limits so a 20 MB import file fits inside the 25 MB POST limit.
 
@@ -36,17 +37,30 @@ php tests/run.php
 
 The suite covers the request DTOs, analysis validation, JWT signing, rate limiting, CSV/TSV/JSON/PDF/XLSX/DOCX/TXT import parsing, and an end-to-end HTTP flow (signup, ingestion, file parsing, bulk import, listing, export, key rotation, login, deletion) against an in-process Groq mock. It creates temporary tenants in the configured database and removes them when it finishes; it does not call the live Groq API.
 
+## Deploy to Render
+
+The included `render.yaml` provisions a free Render web service and a free Render Postgres database in the same region:
+
+1. Push this repository to GitHub.
+2. In the Render Dashboard, choose **New > Blueprint** and select the repository.
+3. Enter the `GROQ_API_KEY` value when prompted, then approve the first sync.
+4. Render builds the Docker image, applies `schema.sql` on startup through `scripts/migrate.php`, and serves the app at its `onrender.com` URL.
+
+The container runs `scripts/migrate.php` before Apache starts, so `schema.sql` must remain idempotent. Set `AUTO_MIGRATE=false` to skip this step.
+
+Render's free Postgres plan expires 30 days after creation. Upgrade the database to a paid plan before then to keep its data.
+
 ## Production deployment
 
 - Serve this directory through Apache with `.htaccess` enabled or configure equivalent Nginx rules. Keep `.env`, `schema.sql`, `src/`, `config/`, and repository metadata outside the public document root where possible; otherwise deny direct web access to them.
-- Run PHP-FPM behind a maintained HTTPS reverse proxy. Set `APP_ENV=production`, a unique `JWT_SECRET`, `GROQ_API_KEY`, `GROQ_CONCURRENCY`, `DB_HOST`, `DB_NAME`, `DB_USER`, and `DB_PASSWORD` in the process environment or a deployment secret store. Never commit `.env`.
+- Run PHP-FPM behind a maintained HTTPS reverse proxy. Set `APP_ENV=production`, a unique `JWT_SECRET`, `GROQ_API_KEY`, `GROQ_CONCURRENCY`, and either `DATABASE_URL` or `DB_HOST`, `DB_PORT`, `DB_NAME`, `DB_USER`, `DB_PASSWORD`, and `DB_SSLMODE` in the process environment or a deployment secret store. Never commit `.env`.
 - Raise PHP's `upload_max_filesize` to at least `20M` and `post_max_size` to at least `25M` if you want to accept the largest supported import files. Ensure the PHP process can execute `pdftotext` for PDF imports.
 - Generate `JWT_SECRET` with `php -r 'echo bin2hex(random_bytes(32)), PHP_EOL;'` and keep it stable across app instances.
-- Use a dedicated MySQL account with only `SELECT`, `INSERT`, `UPDATE`, and `DELETE` privileges on the ReviewRadar database. Do not use MySQL `root` for the application.
+- Use a dedicated PostgreSQL role for the application. Do not use the PostgreSQL superuser for the application.
 - Keep the dashboard and API on the same origin. `APP_CORS_ORIGIN` is an optional exact origin for cross-origin API integrations; wildcard origins are not supported, and dashboard cookies are same-origin only.
 - Terminate HTTPS before public traffic reaches the application. Production sessions are marked `Secure`, `HttpOnly`, and `SameSite=Strict`.
 - Monitor PHP and web-server logs. API responses suppress internal exception details; Groq or database failures are logged server-side.
-- Configure backups and verify restoration of the MySQL database before accepting customer data.
+- Configure backups and verify restoration of the PostgreSQL database before accepting customer data.
 - The built-in rate limiter stores short-lived hashed request counters in the host's temporary directory. For multiple application hosts, move this limiter to a shared store before scaling out.
 
 ## Available product paths

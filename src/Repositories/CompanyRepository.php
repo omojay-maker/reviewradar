@@ -75,6 +75,7 @@ final class CompanyRepository
         $sql = <<<'SQL'
             INSERT INTO companies (name, slug, email, password_hash, api_key, is_active)
             VALUES (:name, :slug, :email, :password_hash, :api_key, 1)
+            RETURNING id
             SQL;
 
         try {
@@ -87,7 +88,7 @@ final class CompanyRepository
                 'api_key' => $apiKey,
             ]);
         } catch (PDOException $e) {
-            if ($e->getCode() === '23000' && str_contains($e->getMessage(), 'email')) {
+            if ($e->getCode() === '23505' && str_contains($e->getMessage(), 'email')) {
                 throw new ValidationException(
                     'An account with this email already exists.',
                     ['email' => 'An account with this email already exists.'],
@@ -97,6 +98,6 @@ final class CompanyRepository
             throw $e;
         }
 
-        return (int) $this->pdo->lastInsertId();
+        return (int) $stmt->fetchColumn();
     }
 }

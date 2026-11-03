@@ -28,7 +28,7 @@ final class ReviewAnalysis
 
     /**
      * Defensive parser for the Groq structured-JSON completion. Every field is
-     * re-validated here so a malformed model response can never corrupt MySQL.
+     * re-validated here so a malformed model response can never corrupt the database.
      *
      * @param array<string, mixed> $payload
      *

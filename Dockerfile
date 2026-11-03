@@ -5,8 +5,9 @@ RUN apt-get update \
         libxml2-dev \
         libzip-dev \
         libonig-dev \
+        libpq-dev \
         poppler-utils \
-    && docker-php-ext-install pdo_mysql mbstring dom zip \
+    && docker-php-ext-install pdo_pgsql mbstring dom zip \
     && a2enmod rewrite headers \
     && rm -rf /var/lib/apt/lists/*
 

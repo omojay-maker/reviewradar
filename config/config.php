@@ -27,6 +27,30 @@ if (is_file($dotenvPath)) {
     }
 }
 
+$dbHost = getenv('DB_HOST') ?: '127.0.0.1';
+$dbPort = (int) (getenv('DB_PORT') ?: 5432);
+$dbName = getenv('DB_NAME') ?: 'reviewradar';
+$dbUser = getenv('DB_USER') ?: '';
+$dbPassword = getenv('DB_PASSWORD') ?: '';
+$dbSslMode = getenv('DB_SSLMODE') ?: 'prefer';
+
+$databaseUrl = getenv('DATABASE_URL') ?: '';
+if ($databaseUrl !== '') {
+    $parts = parse_url($databaseUrl);
+    if (is_array($parts)) {
+        $dbHost = $parts['host'] ?? $dbHost;
+        $dbPort = isset($parts['port']) ? (int) $parts['port'] : $dbPort;
+        $dbName = isset($parts['path']) ? ltrim($parts['path'], '/') : $dbName;
+        $dbUser = isset($parts['user']) ? rawurldecode($parts['user']) : $dbUser;
+        $dbPassword = isset($parts['pass']) ? rawurldecode($parts['pass']) : $dbPassword;
+
+        parse_str($parts['query'] ?? '', $query);
+        if (isset($query['sslmode']) && is_string($query['sslmode']) && $query['sslmode'] !== '') {
+            $dbSslMode = $query['sslmode'];
+        }
+    }
+}
+
 return [
     'app' => [
         'name' => getenv('APP_NAME') ?: 'ReviewRadar',
@@ -36,12 +60,12 @@ return [
         'jwt_ttl_seconds' => (int) (getenv('JWT_TTL') ?: 3600),
     ],
     'db' => [
-        'host' => getenv('DB_HOST') ?: '127.0.0.1',
-        'port' => (int) (getenv('DB_PORT') ?: 3306),
-        'name' => getenv('DB_NAME') ?: 'reviewradar',
-        'user' => getenv('DB_USER') ?: '',
-        'password' => getenv('DB_PASSWORD') ?: '',
-        'charset' => 'utf8mb4',
+        'host' => $dbHost,
+        'port' => $dbPort,
+        'name' => $dbName,
+        'user' => $dbUser,
+        'password' => $dbPassword,
+        'sslmode' => $dbSslMode,
     ],
     'groq' => [
         'api_key' => getenv('GROQ_API_KEY') ?: '',

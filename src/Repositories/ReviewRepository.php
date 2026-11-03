@@ -32,8 +32,9 @@ final class ReviewRepository
                 sentiment, score, categories, summary, requires_action, model, analyzed_at
             ) VALUES (
                 :company_id, :source, :external_id, :author_name, :rating, :raw_text, :source_url,
-                :sentiment, :score, :categories, :summary, :requires_action, :model, UTC_TIMESTAMP()
+                :sentiment, :score, :categories, :summary, :requires_action, :model, NOW()
             )
+            RETURNING id
             SQL;
 
         try {
@@ -56,7 +57,7 @@ final class ReviewRepository
                 'model' => $model,
             ]);
         } catch (PDOException $e) {
-            if ($e->getCode() === '23000') {
+            if ($e->getCode() === '23505') {
                 throw new ValidationException(
                     'A review with this external_id already exists for this company.',
                     ['external_id' => 'Duplicate external_id for this company.'],
@@ -68,7 +69,7 @@ final class ReviewRepository
             throw new ValidationException('Failed to encode review categories.', [], $e);
         }
 
-        return (int) $this->pdo->lastInsertId();
+        return (int) $stmt->fetchColumn();
     }
 
     /** @return list<array<string, mixed>> */
@@ -262,7 +263,7 @@ final class ReviewRepository
     }
 
     /**
-     * Top topics across negative reviews (MySQL 8 JSON_TABLE expansion of the
+     * Top topics across negative reviews (PostgreSQL JSONB expansion of the
      * categories string[] column).
      *
      * @return list<array{category: string, count: int}>
@@ -276,10 +277,7 @@ final class ReviewRepository
         $sql = <<<'SQL'
             SELECT jt.category AS category, COUNT(*) AS complaint_count
             FROM reviews r
-            JOIN JSON_TABLE(
-                r.categories,
-                '$[*]' COLUMNS (category VARCHAR(100) PATH '$')
-            ) AS jt
+            CROSS JOIN LATERAL jsonb_array_elements_text(r.categories) AS jt(category)
             WHERE r.company_id = :company_id
               AND r.sentiment = 'negative'
               AND r.created_at >= :from_date
