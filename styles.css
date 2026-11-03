@@ -282,9 +282,9 @@ body.menu-open { overflow: hidden; }
 /* ---------- Auth + onboarding pages ---------- */
 @media (max-width: 900px) {
   .auth-shell { flex-direction: column; }
-  .auth-hero { flex: 1 1 auto !important; padding: 32px 24px !important; order: 2; }
+  .auth-hero { flex: 1 1 auto !important; padding: 32px 24px !important; order: 1 !important; }
   .auth-hero h1, .auth-hero h2 { font-size: 34px !important; line-height: 1.1 !important; }
-  .auth-panel, .auth-form-panel { flex: 1 1 auto !important; padding: 32px 20px !important; order: -1 !important; }
+  .auth-panel, .auth-form-panel { flex: 1 1 auto !important; padding: 32px 20px !important; order: 2 !important; }
   .auth-examples { display: none !important; }
 }
 
