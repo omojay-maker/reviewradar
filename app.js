@@ -40,7 +40,6 @@
 
   const signup = document.querySelector('#company')?.closest('form');
   if (signup) {
-    signup.querySelector('button[type="button"]')?.setAttribute('type', 'submit');
     signup.addEventListener('submit', async (event) => {
       event.preventDefault();
       const button = signup.querySelector('button[type="submit"]');
@@ -53,7 +52,6 @@
   }
   const login = document.querySelector('#email')?.closest('form');
   if (login && !signup) {
-    login.querySelector('button[type="button"]')?.setAttribute('type', 'submit');
     login.addEventListener('submit', async (event) => {
       event.preventDefault();
       const button = login.querySelector('button[type="submit"]');
